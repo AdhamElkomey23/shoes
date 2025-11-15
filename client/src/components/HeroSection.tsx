@@ -13,7 +13,7 @@ import { shoeProducts, type ColorVariant } from "@/data/shoes";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModelPreloader } from "@/hooks/useModelPreloader";
 
-const AUTO_TRANSITION_DELAY = 5000;
+const AUTO_TRANSITION_DELAY = 3000;
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
