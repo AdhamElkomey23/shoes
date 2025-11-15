@@ -93,7 +93,8 @@ export function HeroSection() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <Header />
-      <ProductInfo product={currentProduct} />
+      <div className="px-5 h-full">
+        <ProductInfo product={currentProduct} />
 
       <NavigationControls
         currentIndex={currentIndex}
@@ -152,6 +153,7 @@ export function HeroSection() {
       </AnimatePresence>
 
       <RotationIndicator isDragging={isDragging} />
+      </div>
     </div>
   );
 }
