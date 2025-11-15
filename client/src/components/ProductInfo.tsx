@@ -10,21 +10,39 @@ export function ProductInfo({ product }: ProductInfoProps) {
     <AnimatePresence mode="wait">
       <motion.div
         key={product.id}
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: 50 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5 }}
-        className="absolute left-10 top-1/2 -translate-y-1/2 z-10 max-w-md"
+        className="absolute top-32 left-8 z-10"
       >
-        <h1 className="text-6xl font-black text-white mb-2 tracking-widest leading-tight uppercase" style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+        <motion.h1
+          className="text-3xl md:text-4xl font-semibold text-white mb-2 tracking-wide"
+          style={{
+            textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+            fontFamily: "'Inter', sans-serif",
+          }}
+        >
           {product.name}
-        </h1>
-        <p className="text-xl text-white/90 mb-6 font-bold tracking-wider uppercase" style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.15em' }}>
+        </motion.h1>
+        <motion.p
+          className="text-sm md:text-base font-medium text-white/80 mb-3 tracking-wide"
+          style={{
+            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+            fontFamily: "'Inter', sans-serif",
+          }}
+        >
           {product.tagline}
-        </p>
-        <div className="text-4xl font-black text-white tracking-wider" style={{ fontFamily: 'system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', letterSpacing: '0.1em' }}>
-          ${product.price.toFixed(2)}
-        </div>
+        </motion.p>
+        <motion.p
+          className="text-2xl md:text-3xl font-semibold text-white"
+          style={{
+            textShadow: "1px 1px 2px rgba(0,0,0,0.5)",
+            fontFamily: "'Inter', sans-serif",
+          }}
+        >
+          {product.price}
+        </motion.p>
       </motion.div>
     </AnimatePresence>
   );

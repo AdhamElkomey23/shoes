@@ -6,31 +6,107 @@ interface LoadingProgressProps {
 
 export function LoadingProgress({ progress }: LoadingProgressProps) {
   return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800 z-50">
-      <div className="text-center">
+    <div className="absolute inset-0 flex items-center justify-center bg-black z-50 overflow-hidden">
+      <motion.div
+        className="absolute inset-0"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.1 }}
+        transition={{ duration: 1 }}
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-white/10 to-transparent rounded-full blur-3xl" />
+      </motion.div>
+
+      <div className="relative z-10 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="mb-8"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="mb-12"
         >
-          <svg className="w-24 h-24 text-white mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.12 0-1.933-.392-2.437-1.177-.317-.504-.41-1.143-.28-1.918.13-.775.476-1.6 1.036-2.478.56-.878 1.266-1.747 2.117-2.606.851-.859 1.833-1.574 2.945-2.145C7.267 4.406 8.39 4 9.511 4c1.456 0 2.464.504 3.024 1.512L24 7.8z"/>
-          </svg>
-          <h2 className="text-2xl font-bold text-white mb-2">Loading Experience</h2>
-          <p className="text-white/60">Preparing your premium footwear</p>
+          <motion.img
+            src="/nike-logo.png"
+            alt="Nike"
+            className="w-32 h-auto mx-auto mb-8"
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          />
+          
+          <motion.h1
+            className="text-5xl md:text-6xl font-bold text-white mb-4 tracking-wider"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            JUST DO IT
+          </motion.h1>
+          
+          <motion.p
+            className="text-white/60 text-lg tracking-wide"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+          >
+            Loading your premium collection
+          </motion.p>
         </motion.div>
 
-        <div className="w-80 max-w-full px-4">
-          <div className="h-2 bg-white/10 rounded-full overflow-hidden">
+        <motion.div
+          className="w-96 max-w-full px-4"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          <div className="relative h-1 bg-white/5 rounded-full overflow-hidden backdrop-blur-sm">
             <motion.div
-              className="h-full bg-white rounded-full"
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-white/80 via-white to-white/80 rounded-full shadow-lg shadow-white/20"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            />
+            <motion.div
+              className="absolute top-0 h-full bg-white/30 rounded-full blur-md"
+              initial={{ width: 0, left: 0 }}
+              animate={{ width: `${progress}%`, left: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             />
           </div>
-          <p className="text-white/80 mt-4 text-lg font-semibold">{Math.round(progress)}%</p>
-        </div>
+          
+          <motion.p
+            className="text-white font-semibold mt-6 text-2xl"
+            style={{ fontFamily: "'Inter', sans-serif" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7 }}
+          >
+            {Math.round(progress)}%
+          </motion.p>
+        </motion.div>
+
+        <motion.div
+          className="mt-8 flex items-center justify-center gap-2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="w-2 h-2 bg-white/40 rounded-full"
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.4, 1, 0.4],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.2,
+              }}
+            />
+          ))}
+        </motion.div>
       </div>
     </div>
   );
