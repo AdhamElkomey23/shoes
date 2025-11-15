@@ -9,13 +9,13 @@ export function Header() {
           className="text-white hover:text-gray-300 transition-colors"
           aria-label="Account"
         >
-          <User className="w-6 h-6" />
+          <User className="w-8 h-8" />
         </button>
         <button
           className="text-white hover:text-gray-300 transition-colors"
           aria-label="Menu"
         >
-          <Menu className="w-6 h-6" />
+          <Menu className="w-8 h-8" />
         </button>
       </div>
     </header>
