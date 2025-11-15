@@ -15,7 +15,7 @@ export function ShoeDisplay({ modelPath, isActive, onDragRotate, onDraggingChang
   const texture = useLoader(THREE.TextureLoader, modelPath);
 
   const aspect = texture.image.width / texture.image.height;
-  const height = 4;
+  const height = 6;
   const width = height * aspect;
 
   return (
