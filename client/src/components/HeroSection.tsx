@@ -156,12 +156,6 @@ export function HeroSection() {
       </AnimatePresence>
 
       <RotationIndicator isDragging={isDragging} />
-
-      <div className="absolute top-8 right-8 z-10">
-        <svg className="w-16 h-16 text-white" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M24 7.8L6.442 15.276c-1.456.616-2.679.925-3.668.925-1.12 0-1.933-.392-2.437-1.177-.317-.504-.41-1.143-.28-1.918.13-.775.476-1.6 1.036-2.478.56-.878 1.266-1.747 2.117-2.606.851-.859 1.833-1.574 2.945-2.145C7.267 4.406 8.39 4 9.511 4c1.456 0 2.464.504 3.024 1.512L24 7.8z"/>
-        </svg>
-      </div>
     </div>
   );
 }
