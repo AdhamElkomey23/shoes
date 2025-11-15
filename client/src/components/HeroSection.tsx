@@ -96,7 +96,7 @@ export function HeroSection() {
       onMouseLeave={() => setIsPaused(false)}
     >
       <Header />
-      <div className="px-5 h-full">
+      <div className="px-10 h-full">
         <ProductInfo product={currentProduct} />
 
         <NavigationControls
