@@ -4,34 +4,61 @@ import { Environment } from "@react-three/drei";
 import { ShoeDisplay } from "./ShoeDisplay";
 import { ProductInfo } from "./ProductInfo";
 import { NavigationControls } from "./NavigationControls";
-import { shoeProducts } from "@/data/shoes";
+import { LoadingProgress } from "./LoadingProgress";
+import { ParticleField } from "./ParticleField";
+import { ColorSelector } from "./ColorSelector";
+import { shoeProducts, type ColorVariant } from "@/data/shoes";
 import { motion, AnimatePresence } from "framer-motion";
+import { useModelPreloader } from "@/hooks/useModelPreloader";
 
 const AUTO_TRANSITION_DELAY = 5000;
 
 export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [zoomLevel, setZoomLevel] = useState(0);
+  const [selectedColors, setSelectedColors] = useState<Record<number, string>>({});
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  const modelPaths = shoeProducts.map(p => p.modelPath);
+  const { progress, isLoaded } = useModelPreloader(modelPaths);
+
   const currentProduct = shoeProducts[currentIndex];
+  const currentColor = selectedColors[currentProduct.id] || currentProduct.color;
 
   const resetTimer = () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    timerRef.current = setTimeout(() => {
-      setCurrentIndex((prev) => (prev + 1) % shoeProducts.length);
-    }, AUTO_TRANSITION_DELAY);
+    if (!isPaused) {
+      timerRef.current = setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % shoeProducts.length);
+      }, AUTO_TRANSITION_DELAY);
+    }
   };
 
   useEffect(() => {
-    resetTimer();
+    if (isLoaded) {
+      resetTimer();
+    }
     return () => {
       if (timerRef.current) {
         clearTimeout(timerRef.current);
       }
     };
-  }, [currentIndex]);
+  }, [currentIndex, isPaused, isLoaded]);
+
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    setZoomLevel((prev) => {
+      const newZoom = prev - e.deltaY * 0.01;
+      return Math.max(-3, Math.min(3, newZoom));
+    });
+  };
+
+  if (!isLoaded) {
+    return <LoadingProgress progress={progress} />;
+  }
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % shoeProducts.length);
@@ -49,11 +76,28 @@ export function HeroSection() {
     }
   };
 
+  const handleColorSelect = (variant: ColorVariant) => {
+    setSelectedColors((prev) => ({
+      ...prev,
+      [currentProduct.id]: variant.color
+    }));
+  };
+
   return (
-    <div className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800">
+    <div 
+      className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-700/20 via-gray-900/50 to-black" />
 
       <ProductInfo product={currentProduct} />
+
+      <ColorSelector
+        variants={currentProduct.variants}
+        selectedColor={currentColor}
+        onColorSelect={handleColorSelect}
+      />
 
       <NavigationControls
         currentIndex={currentIndex}
@@ -71,10 +115,11 @@ export function HeroSection() {
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
           className="w-full h-full absolute inset-0"
+          onWheel={handleWheel}
         >
           <Canvas
             camera={{
-              position: [0, 0, 8],
+              position: [0, 0, 8 - zoomLevel],
               fov: 45,
             }}
             gl={{
@@ -82,7 +127,7 @@ export function HeroSection() {
               alpha: true,
             }}
           >
-            <color attach="background" args={["transparent"]} />
+            <color attach="background" args={["#000000"]} />
 
             <ambientLight intensity={0.5} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
@@ -90,9 +135,12 @@ export function HeroSection() {
             <spotLight position={[0, 10, 0]} intensity={0.8} angle={0.3} penumbra={1} />
 
             <Suspense fallback={null}>
+              <ParticleField />
+              
               <ShoeDisplay
                 modelPath={currentProduct.modelPath}
                 isActive={true}
+                selectedColor={currentColor}
               />
 
               <Environment preset="city" />
