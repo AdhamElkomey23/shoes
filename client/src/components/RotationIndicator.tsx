@@ -6,7 +6,7 @@ interface RotationIndicatorProps {
 
 export function RotationIndicator({ isDragging }: RotationIndicatorProps) {
   return (
-    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+    <div className="absolute bottom-20 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
       <motion.div 
         className="relative"
         initial={{ opacity: 0, y: 20 }}
