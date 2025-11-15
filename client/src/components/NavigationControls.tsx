@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface NavigationControlsProps {
@@ -31,23 +31,6 @@ export function NavigationControls({
             aria-label={`Go to product ${index + 1}`}
           />
         ))}
-      </div>
-
-      <div className="absolute left-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-10">
-        <button
-          onClick={onPrevious}
-          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 border border-white/20"
-          aria-label="Previous product"
-        >
-          <ChevronLeft className="w-6 h-6 text-white" />
-        </button>
-        <button
-          onClick={onNext}
-          className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-all duration-300 border border-white/20"
-          aria-label="Next product"
-        >
-          <ChevronRight className="w-6 h-6 text-white" />
-        </button>
       </div>
 
       <motion.button
