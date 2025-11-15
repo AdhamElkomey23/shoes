@@ -24,30 +24,6 @@ export function ShoeDisplay({ modelPath, isActive, onDragRotate, onDraggingChang
       position={[0, 0, 0]} 
       rotation={[0, 0, 0]}
     >
-      <mesh position={[0, 0, -0.2]}>
-        <circleGeometry args={[3.5, 64]} />
-        <meshBasicMaterial 
-          color="#8B5CF6"
-          transparent
-          opacity={0.3}
-        />
-      </mesh>
-      <mesh position={[0, 0, -0.15]}>
-        <circleGeometry args={[3, 64]} />
-        <meshBasicMaterial 
-          color="#A78BFA"
-          transparent
-          opacity={0.5}
-        />
-      </mesh>
-      <mesh position={[0, 0, -0.1]}>
-        <circleGeometry args={[2.5, 64]} />
-        <meshBasicMaterial 
-          color="#C4B5FD"
-          transparent
-          opacity={0.6}
-        />
-      </mesh>
       <mesh>
         <planeGeometry args={[width, height]} />
         <meshBasicMaterial 
