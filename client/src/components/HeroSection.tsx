@@ -91,7 +91,7 @@ export function HeroSection() {
     >
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-        style={{ backgroundImage: 'url(/attached_assets/NIKE_1763227584283.png)' }}
+        style={{ backgroundImage: 'url(/nike-logo.png)' }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
 
