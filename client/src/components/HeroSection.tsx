@@ -7,6 +7,7 @@ import { NavigationControls } from "./NavigationControls";
 import { LoadingProgress } from "./LoadingProgress";
 import { ParticleField } from "./ParticleField";
 import { ColorSelector } from "./ColorSelector";
+import { RotationIndicator } from "./RotationIndicator";
 import { shoeProducts, type ColorVariant } from "@/data/shoes";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModelPreloader } from "@/hooks/useModelPreloader";
@@ -18,6 +19,7 @@ export function HeroSection() {
   const [isPaused, setIsPaused] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(0);
   const [selectedColors, setSelectedColors] = useState<Record<number, string>>({});
+  const [isDragging, setIsDragging] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const modelPaths = shoeProducts.map(p => p.modelPath);
@@ -143,6 +145,7 @@ export function HeroSection() {
                 modelPath={currentProduct.modelPath}
                 isActive={true}
                 selectedColor={currentColor}
+                onDraggingChange={setIsDragging}
               />
 
               <Environment preset="city" />
@@ -150,6 +153,8 @@ export function HeroSection() {
           </Canvas>
         </motion.div>
       </AnimatePresence>
+
+      <RotationIndicator isDragging={isDragging} />
 
       <div className="absolute top-8 right-8 z-10">
         <svg className="w-16 h-16 text-white" viewBox="0 0 24 24" fill="currentColor">

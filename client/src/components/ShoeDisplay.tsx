@@ -8,14 +8,15 @@ interface ShoeDisplayProps {
   isActive: boolean;
   selectedColor?: string;
   onDragRotate?: (deltaX: number) => void;
+  onDraggingChange?: (isDragging: boolean) => void;
 }
 
-export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate }: ShoeDisplayProps) {
+export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate, onDraggingChange }: ShoeDisplayProps) {
   const meshRef = useRef<THREE.Group>(null);
   const gltf = useLoader(GLTFLoader, modelPath);
   const [isDragging, setIsDragging] = useState(false);
   const [previousMouseX, setPreviousMouseX] = useState(0);
-  const manualRotationRef = useRef(0);
+  const manualRotationRef = useRef(-Math.PI / 2); // Face left initially
   const { gl } = useThree();
 
   useEffect(() => {
@@ -36,10 +37,7 @@ export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate }
   }, [selectedColor]);
 
   useFrame((state, delta) => {
-    if (meshRef.current && isActive && !isDragging) {
-      meshRef.current.rotation.y += delta * 0.5;
-      manualRotationRef.current = meshRef.current.rotation.y;
-    } else if (meshRef.current && isDragging) {
+    if (meshRef.current) {
       meshRef.current.rotation.y = manualRotationRef.current;
     }
   });
@@ -49,6 +47,7 @@ export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate }
     setIsDragging(true);
     setPreviousMouseX(e.clientX);
     gl.domElement.style.cursor = 'grabbing';
+    if (onDraggingChange) onDraggingChange(true);
   };
 
   const handlePointerMove = (e: any) => {
@@ -68,6 +67,7 @@ export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate }
   const handlePointerUp = () => {
     setIsDragging(false);
     gl.domElement.style.cursor = 'grab';
+    if (onDraggingChange) onDraggingChange(false);
   };
 
   return (
@@ -75,6 +75,7 @@ export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate }
       ref={meshRef} 
       position={[0, -1, 0]} 
       scale={2.5}
+      rotation={[0, manualRotationRef.current, 0]}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}

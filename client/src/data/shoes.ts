@@ -20,7 +20,7 @@ export const shoeProducts: ShoeProduct[] = [
     name: "Air Velocity",
     tagline: "BUILT FOR SPEED. DESIGNED TO LEAD",
     price: "$189.99",
-    modelPath: "/models/shoe-blue-runner.glb",
+    modelPath: "/models/shoe-blue-runner-hq.glb",
     color: "#3B82F6",
     variants: [
       { name: "Electric Blue", color: "#3B82F6", meshColor: "#3B82F6" },
@@ -34,7 +34,7 @@ export const shoeProducts: ShoeProduct[] = [
     name: "Court Master",
     tagline: "DOMINATE THE GAME. OWN THE COURT",
     price: "$219.99",
-    modelPath: "/models/shoe-green-basketball.glb",
+    modelPath: "/models/shoe-green-basketball-hq.glb",
     color: "#10B981",
     variants: [
       { name: "Neon Green", color: "#10B981", meshColor: "#10B981" },
@@ -48,7 +48,7 @@ export const shoeProducts: ShoeProduct[] = [
     name: "Urban Flow",
     tagline: "STYLE MEETS COMFORT. EVERYDAY EXCELLENCE",
     price: "$159.99",
-    modelPath: "/models/shoe-orange-lifestyle.glb",
+    modelPath: "/models/shoe-orange-lifestyle-hq.glb",
     color: "#F97316",
     variants: [
       { name: "Sunset Orange", color: "#F97316", meshColor: "#F97316" },
