@@ -8,6 +8,7 @@ import { LoadingProgress } from "./LoadingProgress";
 import { ParticleField } from "./ParticleField";
 import { ColorSelector } from "./ColorSelector";
 import { RotationIndicator } from "./RotationIndicator";
+import { Header } from "./Header";
 import { shoeProducts, type ColorVariant } from "@/data/shoes";
 import { motion, AnimatePresence } from "framer-motion";
 import { useModelPreloader } from "@/hooks/useModelPreloader";
@@ -97,6 +98,7 @@ export function HeroSection() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
 
+      <Header />
       <ProductInfo product={currentProduct} />
 
       <NavigationControls
