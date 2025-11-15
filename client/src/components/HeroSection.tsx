@@ -134,6 +134,7 @@ export function HeroSection() {
             }}
           >
             <ambientLight intensity={0.5} />
+            <ambientLight color="#3B0F70" intensity={0.15} />
             <directionalLight position={[10, 10, 5]} intensity={1} />
             <directionalLight position={[-10, -10, -5]} intensity={0.5} />
             <spotLight position={[0, 10, 0]} intensity={0.8} angle={0.3} penumbra={1} />
