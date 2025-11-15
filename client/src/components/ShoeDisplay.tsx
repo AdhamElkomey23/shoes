@@ -18,6 +18,9 @@ export function ShoeDisplay({ modelPath, isActive, onDragRotate, onDraggingChang
   const manualRotationRef = useRef(-Math.PI / 2);
   const { gl } = useThree();
 
+  console.log('Loading texture from:', modelPath);
+  console.log('Texture loaded:', texture);
+
   useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y = manualRotationRef.current;
@@ -66,9 +69,14 @@ export function ShoeDisplay({ modelPath, isActive, onDragRotate, onDraggingChang
         <planeGeometry args={[4, 4]} />
         <meshBasicMaterial 
           map={texture} 
-          transparent 
+          transparent={false}
           side={THREE.DoubleSide}
+          toneMapped={false}
         />
+      </mesh>
+      <mesh position={[0, 0, -0.1]}>
+        <planeGeometry args={[4.5, 4.5]} />
+        <meshBasicMaterial color="#ffffff" opacity={0.3} transparent side={THREE.DoubleSide} />
       </mesh>
     </group>
   );
