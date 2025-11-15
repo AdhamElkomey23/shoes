@@ -1,6 +1,5 @@
-import { useRef, useState, useEffect } from "react";
-import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { useRef, useState } from "react";
+import { useFrame, useThree, useLoader } from "@react-three/fiber";
 import * as THREE from "three";
 
 interface ShoeDisplayProps {
@@ -11,32 +10,15 @@ interface ShoeDisplayProps {
   onDraggingChange?: (isDragging: boolean) => void;
 }
 
-export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate, onDraggingChange }: ShoeDisplayProps) {
+export function ShoeDisplay({ modelPath, isActive, onDragRotate, onDraggingChange }: ShoeDisplayProps) {
   const meshRef = useRef<THREE.Group>(null);
-  const gltf = useLoader(GLTFLoader, modelPath);
+  const texture = useLoader(THREE.TextureLoader, modelPath);
   const [isDragging, setIsDragging] = useState(false);
   const [previousMouseX, setPreviousMouseX] = useState(0);
-  const manualRotationRef = useRef(-Math.PI / 2); // Face left initially
+  const manualRotationRef = useRef(-Math.PI / 2);
   const { gl } = useThree();
 
-  useEffect(() => {
-    if (meshRef.current && selectedColor) {
-      meshRef.current.traverse((child) => {
-        if ((child as THREE.Mesh).isMesh) {
-          const mesh = child as THREE.Mesh;
-          if (mesh.material) {
-            const material = mesh.material as THREE.MeshStandardMaterial;
-            if (material.color) {
-              material.color.set(selectedColor);
-              material.needsUpdate = true;
-            }
-          }
-        }
-      });
-    }
-  }, [selectedColor]);
-
-  useFrame((state, delta) => {
+  useFrame(() => {
     if (meshRef.current) {
       meshRef.current.rotation.y = manualRotationRef.current;
     }
@@ -74,14 +56,20 @@ export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate, 
     <group 
       ref={meshRef} 
       position={[0, 0, 0]} 
-      scale={4}
       rotation={[0, manualRotationRef.current, 0]}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerLeave={handlePointerUp}
     >
-      <primitive object={gltf.scene.clone()} />
+      <mesh>
+        <planeGeometry args={[4, 4]} />
+        <meshBasicMaterial 
+          map={texture} 
+          transparent 
+          side={THREE.DoubleSide}
+        />
+      </mesh>
     </group>
   );
 }

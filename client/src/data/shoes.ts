@@ -17,44 +17,44 @@ export interface ShoeProduct {
 export const shoeProducts: ShoeProduct[] = [
   {
     id: 1,
-    name: "Air Velocity",
-    tagline: "BUILT FOR SPEED. DESIGNED TO LEAD",
+    name: "Air Jordan 1",
+    tagline: "ICONIC STYLE. LEGENDARY PERFORMANCE",
     price: "$189.99",
-    modelPath: "/models/shoe-blue-runner-hq.glb",
-    color: "#3B82F6",
+    modelPath: "/shoes/shoe-red-white.png",
+    color: "#DC2626",
     variants: [
-      { name: "Electric Blue", color: "#3B82F6", meshColor: "#3B82F6" },
+      { name: "Chicago Red", color: "#DC2626", meshColor: "#DC2626" },
       { name: "Midnight Black", color: "#1F2937", meshColor: "#1F2937" },
-      { name: "Crimson Red", color: "#DC2626", meshColor: "#DC2626" },
+      { name: "Royal Blue", color: "#3B82F6", meshColor: "#3B82F6" },
       { name: "Snow White", color: "#F3F4F6", meshColor: "#F3F4F6" }
     ]
   },
   {
     id: 2,
-    name: "Court Master",
-    tagline: "DOMINATE THE GAME. OWN THE COURT",
-    price: "$219.99",
-    modelPath: "/models/shoe-green-basketball-hq.glb",
-    color: "#10B981",
+    name: "Air Jordan 1 Shadow",
+    tagline: "CLASSIC COLORWAY. TIMELESS DESIGN",
+    price: "$199.99",
+    modelPath: "/shoes/shoe-black-white.png",
+    color: "#1F2937",
     variants: [
-      { name: "Neon Green", color: "#10B981", meshColor: "#10B981" },
+      { name: "Shadow Black", color: "#1F2937", meshColor: "#1F2937" },
       { name: "Royal Purple", color: "#8B5CF6", meshColor: "#8B5CF6" },
-      { name: "Classic Black", color: "#111827", meshColor: "#111827" },
-      { name: "Gold", color: "#F59E0B", meshColor: "#F59E0B" }
+      { name: "Crimson Red", color: "#DC2626", meshColor: "#DC2626" },
+      { name: "Snow White", color: "#F3F4F6", meshColor: "#F3F4F6" }
     ]
   },
   {
     id: 3,
-    name: "Urban Flow",
-    tagline: "STYLE MEETS COMFORT. EVERYDAY EXCELLENCE",
-    price: "$159.99",
-    modelPath: "/models/shoe-orange-lifestyle-hq.glb",
-    color: "#F97316",
+    name: "Air Jordan 1 Volt",
+    tagline: "BOLD AND BRIGHT. STAND OUT",
+    price: "$209.99",
+    modelPath: "/shoes/shoe-yellow-green.png",
+    color: "#84CC16",
     variants: [
-      { name: "Sunset Orange", color: "#F97316", meshColor: "#F97316" },
-      { name: "Ocean Blue", color: "#0EA5E9", meshColor: "#0EA5E9" },
-      { name: "Forest Green", color: "#059669", meshColor: "#059669" },
-      { name: "Pink Blush", color: "#EC4899", meshColor: "#EC4899" }
+      { name: "Volt Yellow", color: "#84CC16", meshColor: "#84CC16" },
+      { name: "Neon Green", color: "#10B981", meshColor: "#10B981" },
+      { name: "Electric Blue", color: "#0EA5E9", meshColor: "#0EA5E9" },
+      { name: "Hot Pink", color: "#EC4899", meshColor: "#EC4899" }
     ]
   }
 ];
