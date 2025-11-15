@@ -85,11 +85,15 @@ export function HeroSection() {
 
   return (
     <div 
-      className="w-full h-screen relative overflow-hidden bg-gradient-to-br from-gray-900 via-black to-gray-800"
+      className="w-full h-screen relative overflow-hidden bg-black"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-gray-700/20 via-gray-900/50 to-black" />
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+        style={{ backgroundImage: 'url(/attached_assets/NIKE_1763227584283.png)' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
 
       <ProductInfo product={currentProduct} />
 
