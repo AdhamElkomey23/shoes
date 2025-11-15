@@ -74,7 +74,7 @@ export function ShoeDisplay({ modelPath, isActive, selectedColor, onDragRotate, 
     <group 
       ref={meshRef} 
       position={[0, -1, 0]} 
-      scale={3.5}
+      scale={4}
       rotation={[0, manualRotationRef.current, 0]}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
