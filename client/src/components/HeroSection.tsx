@@ -19,15 +19,18 @@ export function HeroSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [zoomLevel, setZoomLevel] = useState(0);
-  const [selectedColors, setSelectedColors] = useState<Record<number, string>>({});
+  const [selectedColors, setSelectedColors] = useState<Record<number, string>>(
+    {},
+  );
   const [isDragging, setIsDragging] = useState(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const modelPaths = shoeProducts.map(p => p.modelPath);
+  const modelPaths = shoeProducts.map((p) => p.modelPath);
   const { progress, isLoaded } = useModelPreloader(modelPaths);
 
   const currentProduct = shoeProducts[currentIndex];
-  const currentColor = selectedColors[currentProduct.id] || currentProduct.color;
+  const currentColor =
+    selectedColors[currentProduct.id] || currentProduct.color;
 
   const resetTimer = () => {
     if (timerRef.current) {
@@ -69,7 +72,7 @@ export function HeroSection() {
 
   const handlePrevious = () => {
     setCurrentIndex(
-      (prev) => (prev - 1 + shoeProducts.length) % shoeProducts.length
+      (prev) => (prev - 1 + shoeProducts.length) % shoeProducts.length,
     );
   };
 
@@ -82,77 +85,82 @@ export function HeroSection() {
   const handleColorSelect = (variant: ColorVariant) => {
     setSelectedColors((prev) => ({
       ...prev,
-      [currentProduct.id]: variant.color
+      [currentProduct.id]: variant.color,
     }));
   };
 
   return (
-    <div 
+    <div
       className="w-full h-screen relative overflow-hidden bg-black"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       <Header />
-      <div className="px-5 h-full">
+      <div className="px-20 h-full">
         <ProductInfo product={currentProduct} />
 
-      <NavigationControls
-        currentIndex={currentIndex}
-        totalProducts={shoeProducts.length}
-        onPrevious={handlePrevious}
-        onNext={handleNext}
-        onDotClick={handleDotClick}
-      >
-        <ColorSelector
-          variants={currentProduct.variants}
-          selectedColor={currentColor}
-          onColorSelect={handleColorSelect}
-        />
-      </NavigationControls>
-
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="w-full h-full absolute inset-0"
-          onWheel={handleWheel}
+        <NavigationControls
+          currentIndex={currentIndex}
+          totalProducts={shoeProducts.length}
+          onPrevious={handlePrevious}
+          onNext={handleNext}
+          onDotClick={handleDotClick}
         >
-          <Canvas
-            camera={{
-              position: [0, 0, 8 - zoomLevel],
-              fov: 45,
-            }}
-            gl={{
-              antialias: true,
-              alpha: true,
-            }}
-          >
-            <ambientLight intensity={0.5} />
-            <ambientLight color="#3B0F70" intensity={0.15} />
-            <directionalLight position={[10, 10, 5]} intensity={1} />
-            <directionalLight position={[-10, -10, -5]} intensity={0.5} />
-            <spotLight position={[0, 10, 0]} intensity={0.8} angle={0.3} penumbra={1} />
+          <ColorSelector
+            variants={currentProduct.variants}
+            selectedColor={currentColor}
+            onColorSelect={handleColorSelect}
+          />
+        </NavigationControls>
 
-            <Suspense fallback={null}>
-              <ParticleField />
-              
-              <ShoeDisplay
-                modelPath={currentProduct.modelPath}
-                isActive={true}
-                selectedColor={currentColor}
-                onDraggingChange={setIsDragging}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="w-full h-full absolute inset-0"
+            onWheel={handleWheel}
+          >
+            <Canvas
+              camera={{
+                position: [0, 0, 8 - zoomLevel],
+                fov: 45,
+              }}
+              gl={{
+                antialias: true,
+                alpha: true,
+              }}
+            >
+              <ambientLight intensity={0.5} />
+              <ambientLight color="#3B0F70" intensity={0.15} />
+              <directionalLight position={[10, 10, 5]} intensity={1} />
+              <directionalLight position={[-10, -10, -5]} intensity={0.5} />
+              <spotLight
+                position={[0, 10, 0]}
+                intensity={0.8}
+                angle={0.3}
+                penumbra={1}
               />
 
-              <Environment preset="city" />
-            </Suspense>
-          </Canvas>
-        </motion.div>
-      </AnimatePresence>
+              <Suspense fallback={null}>
+                <ParticleField />
 
-      <RotationIndicator isDragging={isDragging} />
+                <ShoeDisplay
+                  modelPath={currentProduct.modelPath}
+                  isActive={true}
+                  selectedColor={currentColor}
+                  onDraggingChange={setIsDragging}
+                />
+
+                <Environment preset="city" />
+              </Suspense>
+            </Canvas>
+          </motion.div>
+        </AnimatePresence>
+
+        <RotationIndicator isDragging={isDragging} />
       </div>
     </div>
   );
