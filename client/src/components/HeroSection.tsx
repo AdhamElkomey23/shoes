@@ -92,12 +92,6 @@ export function HeroSection() {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
-        style={{ backgroundImage: 'url(/nike-logo.png)' }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
-
       <Header />
       <ProductInfo product={currentProduct} />
 
