@@ -9,7 +9,7 @@ interface ColorSelectorProps {
 
 export function ColorSelector({ variants, selectedColor, onColorSelect }: ColorSelectorProps) {
   return (
-    <div className="absolute bottom-24 left-8 z-10">
+    <div className="flex flex-col items-start">
       <p className="text-white/80 text-sm font-semibold mb-3 tracking-wide">SELECT COLOR</p>
       <div className="flex gap-3">
         {variants.map((variant, index) => (

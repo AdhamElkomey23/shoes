@@ -7,6 +7,7 @@ interface NavigationControlsProps {
   onPrevious: () => void;
   onNext: () => void;
   onDotClick: (index: number) => void;
+  children?: React.ReactNode;
 }
 
 export function NavigationControls({
@@ -15,6 +16,7 @@ export function NavigationControls({
   onPrevious,
   onNext,
   onDotClick,
+  children,
 }: NavigationControlsProps) {
   return (
     <>
@@ -33,14 +35,17 @@ export function NavigationControls({
         ))}
       </div>
 
-      <motion.button
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="absolute bottom-8 right-8 px-8 py-4 bg-white text-black font-bold rounded-full flex items-center gap-2 hover:bg-gray-100 transition-all duration-300 z-10"
-      >
-        <ShoppingCart className="w-5 h-5" />
-        ADD TO CART
-      </motion.button>
+      <div className="absolute bottom-8 left-8 right-8 flex items-end justify-between z-10">
+        {children}
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-8 py-4 bg-white text-black font-bold rounded-full flex items-center gap-2 hover:bg-gray-100 transition-all duration-300"
+        >
+          <ShoppingCart className="w-5 h-5" />
+          ADD TO CART
+        </motion.button>
+      </div>
     </>
   );
 }

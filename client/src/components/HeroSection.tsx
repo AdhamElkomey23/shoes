@@ -99,19 +99,19 @@ export function HeroSection() {
 
       <ProductInfo product={currentProduct} />
 
-      <ColorSelector
-        variants={currentProduct.variants}
-        selectedColor={currentColor}
-        onColorSelect={handleColorSelect}
-      />
-
       <NavigationControls
         currentIndex={currentIndex}
         totalProducts={shoeProducts.length}
         onPrevious={handlePrevious}
         onNext={handleNext}
         onDotClick={handleDotClick}
-      />
+      >
+        <ColorSelector
+          variants={currentProduct.variants}
+          selectedColor={currentColor}
+          onColorSelect={handleColorSelect}
+        />
+      </NavigationControls>
 
       <AnimatePresence mode="wait">
         <motion.div
