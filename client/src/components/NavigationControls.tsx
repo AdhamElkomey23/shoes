@@ -18,14 +18,14 @@ export function NavigationControls({
 }: NavigationControlsProps) {
   return (
     <>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+      <div className="absolute right-8 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-10">
         {Array.from({ length: totalProducts }).map((_, index) => (
           <button
             key={index}
             onClick={() => onDotClick(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
               index === currentIndex
-                ? "bg-white w-8"
+                ? "bg-white h-8"
                 : "bg-white/40 hover:bg-white/60"
             }`}
             aria-label={`Go to product ${index + 1}`}
